@@ -31,14 +31,12 @@ class FlaskClientTestCase(unittest.TestCase):
             'password2': 'cat'
         })
         self.assertEqual(response.status_code, 302)
-        print(response.data)
 
         # login with the new account
         response = self.client.post('/auth/login', data={
             'email': 'john@example.com',
             'password': 'cat'
         }, follow_redirects=True)
-        breakpoint()
         self.assertEqual(response.status_code, 200)
         self.assertTrue(re.search(b'Hello,\s+john!', response.data))
         self.assertTrue(
